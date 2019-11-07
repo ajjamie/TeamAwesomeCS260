@@ -1,0 +1,43 @@
+{% extends "base.html" %} 
+
+{% load crispy_forms_tags %}
+
+{% block header %}
+<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">{{ dog }}</h2>
+{% endblock header %} {% block main%}
+
+<!-- Main Content -->
+
+<div class="container">
+        <section class="mb-4">
+          <div class="row wow fadeIn">
+            <div class='col-6 offset-3'>
+
+{% if action == 'POST_SUCCESSFULL' %}
+<div class="alert alert-success" role="alert">
+    Succesfully Added. <a href="/" class="alert-link">Go to homepage</a>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% elif action == 'POST_FAILED' %}
+<div class="alert alert-danger" role="alert">
+    Failed to be added! Please check the error messages.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div style="text-align: center;">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+</div>
+</div>
+</section>
+</div>
+{% endblock%}
